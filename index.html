@@ -416,6 +416,76 @@
             margin: 30px 0;
         }
 
+        /* Estilos para Capítulos */
+        .intro-section {
+            margin-bottom: 35px;
+        }
+
+        .chapter-section {
+            margin-bottom: 20px;
+        }
+
+        .chapter-header {
+            background: rgba(102, 126, 234, 0.15);
+            padding: 18px 20px;
+            border-radius: 12px;
+            margin-bottom: 0;
+            border-left: 4px solid #667eea;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chapter-header:hover {
+            background: rgba(102, 126, 234, 0.25);
+            transform: translateX(5px);
+        }
+
+        .chapter-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #667eea;
+            margin: 0;
+        }
+
+        .chapter-arrow {
+            font-size: 1.5em;
+            transition: transform 0.3s ease;
+            color: #667eea;
+        }
+
+        .chapter-arrow.open {
+            transform: rotate(180deg);
+        }
+
+        .chapter-videos {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .chapter-videos.open {
+            max-height: 2000px;
+            padding-top: 15px;
+        }
+
+        .intro-video {
+            background: rgba(240, 147, 251, 0.1);
+            border-left: 4px solid #f093fb;
+            cursor: default;
+        }
+
+        .intro-video:hover {
+            background: rgba(240, 147, 251, 0.1);
+            transform: none;
+        }
+
+        .intro-video .chapter-title {
+            color: #f093fb;
+        }
+
         .video-item {
             background: rgba(255,255,255,0.05);
             padding: 20px;
@@ -804,43 +874,46 @@
         const courseVideos = {
             roblox: {
                 title: '🎮 Programação Roblox (Lua)',
-                videos: [
+                intro: {
+                    title: 'Aula 1 - Introdução ao Roblox Studio',
+                    description: 'Aprenda os básicos do Roblox Studio e crie seu primeiro jogo',
+                    videoId: 'NHMqYCoz0-k'
+                },
+                chapters: [
                     {
-                        title: 'Aula 1 - Introdução ao Roblox Studio',
-                        description: 'Aprenda os básicos do Roblox Studio e crie seu primeiro jogo',
-                        videoId: 'NHMqYCoz0-k'
-                    },
+                        name: 'Capítulo 1 - Lógica de Programação',
+                        videos: [
+                            {
+                                title: 'Aula 1 - Lógica e UI',
+                                description: 'Conhece as bases da lógica e da interface no Roblox Studio.',
+                                videoId: 'ZKOUldtMp_w'
+                            },
+                            }
+                        ]
+                    }
+                        ]
+                    }
                 ]
             },
             modelagem3d: {
                 title: '🎨 Modelagem 3D',
-                videos: [
-
-                ]
+                videos: []
             },
             edicaovideo: {
                 title: '🎬 Edição de Vídeo',
-                videos: [
-
-                ]
+                videos: []
             },
             eletronica: {
                 title: '⚡ Circuitos e Eletrónica',
-                videos: [
-
-                ]
+                videos: []
             },
             python: {
                 title: '🐍 Python',
-                videos: [
-
-                ]
+                videos: []
             },
             jogos2d: {
                 title: '🕹️ Criação de Jogos 2D',
-                videos: [
-
-                ]
+                videos: []
             }
         };
 
@@ -882,6 +955,19 @@
             document.body.style.overflow = 'auto';
         }
 
+        function toggleChapter(chapterId) {
+            const chapterVideos = document.getElementById(chapterId);
+            const arrow = document.getElementById(chapterId + '-arrow');
+            
+            if (chapterVideos.classList.contains('open')) {
+                chapterVideos.classList.remove('open');
+                arrow.classList.remove('open');
+            } else {
+                chapterVideos.classList.add('open');
+                arrow.classList.add('open');
+            }
+        }
+
         function openVideo(course) {
             const courseData = courseVideos[course];
             const modal = document.getElementById('modal');
@@ -891,21 +977,92 @@
             modalTitle.textContent = courseData.title;
             videoList.innerHTML = '';
 
-            courseData.videos.forEach(video => {
-                const li = document.createElement('li');
-                li.className = 'video-item';
-                li.onclick = () => playVideo(video.videoId, video.title, video.description);
+            // Se o curso tiver introdução, adiciona ela primeiro
+            if (courseData.intro) {
+                const introSection = document.createElement('div');
+                introSection.className = 'intro-section';
                 
-                li.innerHTML = `
+                const introHeader = document.createElement('div');
+                introHeader.className = 'chapter-header intro-video';
+                introHeader.innerHTML = '<h3 class="chapter-title">📌 Introdução</h3>';
+                introSection.appendChild(introHeader);
+
+                const introLi = document.createElement('li');
+                introLi.className = 'video-item';
+                introLi.style.marginTop = '15px';
+                introLi.onclick = () => playVideo(courseData.intro.videoId, courseData.intro.title, courseData.intro.description);
+                
+                introLi.innerHTML = `
                     <div class="video-item-icon">▶️</div>
                     <div class="video-item-text">
-                        <div class="video-item-title">${video.title}</div>
-                        <div class="video-item-desc">${video.description}</div>
+                        <div class="video-item-title">${courseData.intro.title}</div>
+                        <div class="video-item-desc">${courseData.intro.description}</div>
                     </div>
                 `;
                 
-                videoList.appendChild(li);
-            });
+                introSection.appendChild(introLi);
+                videoList.appendChild(introSection);
+            }
+
+            // Se o curso tiver capítulos, adiciona eles com accordion
+            if (courseData.chapters) {
+                courseData.chapters.forEach((chapter, index) => {
+                    const chapterSection = document.createElement('div');
+                    chapterSection.className = 'chapter-section';
+                    
+                    const chapterId = `chapter-${course}-${index}`;
+                    
+                    const chapterHeader = document.createElement('div');
+                    chapterHeader.className = 'chapter-header';
+                    chapterHeader.onclick = () => toggleChapter(chapterId);
+                    chapterHeader.innerHTML = `
+                        <h3 class="chapter-title">${chapter.name}</h3>
+                        <span class="chapter-arrow" id="${chapterId}-arrow">⌄</span>
+                    `;
+                    chapterSection.appendChild(chapterHeader);
+
+                    const chapterVideosContainer = document.createElement('div');
+                    chapterVideosContainer.className = 'chapter-videos';
+                    chapterVideosContainer.id = chapterId;
+
+                    chapter.videos.forEach(video => {
+                        const li = document.createElement('li');
+                        li.className = 'video-item';
+                        li.onclick = () => playVideo(video.videoId, video.title, video.description);
+                        
+                        li.innerHTML = `
+                            <div class="video-item-icon">▶️</div>
+                            <div class="video-item-text">
+                                <div class="video-item-title">${video.title}</div>
+                                <div class="video-item-desc">${video.description}</div>
+                            </div>
+                        `;
+                        
+                        chapterVideosContainer.appendChild(li);
+                    });
+
+                    chapterSection.appendChild(chapterVideosContainer);
+                    videoList.appendChild(chapterSection);
+                });
+            }
+            // Se o curso tiver apenas vídeos simples (sem capítulos)
+            else if (courseData.videos && courseData.videos.length > 0) {
+                courseData.videos.forEach(video => {
+                    const li = document.createElement('li');
+                    li.className = 'video-item';
+                    li.onclick = () => playVideo(video.videoId, video.title, video.description);
+                    
+                    li.innerHTML = `
+                        <div class="video-item-icon">▶️</div>
+                        <div class="video-item-text">
+                            <div class="video-item-title">${video.title}</div>
+                            <div class="video-item-desc">${video.description}</div>
+                        </div>
+                    `;
+                    
+                    videoList.appendChild(li);
+                });
+            }
 
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
