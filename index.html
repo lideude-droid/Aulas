@@ -184,6 +184,87 @@
             overflow-y: auto;
         }
 
+        .video-player-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 2000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .video-player-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-player-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .video-player-title {
+            color: white;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .back-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .video-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: #000;
+        }
+
+        .video-frame {
+            width: 100%;
+            max-width: 1200px;
+            aspect-ratio: 16/9;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .video-info {
+            background: #1a1a1a;
+            color: white;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .video-description {
+            font-size: 1.1em;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
         .modal-content h2 {
             color: #333;
             margin-bottom: 20px;
@@ -401,6 +482,21 @@
         </div>
     </div>
 
+    <div class="video-player-modal" id="videoPlayer">
+        <div class="video-player-container">
+            <div class="video-player-header">
+                <div class="video-player-title" id="currentVideoTitle"></div>
+                <button class="back-btn" onclick="closeVideoPlayer()">← Voltar às Aulas</button>
+            </div>
+            <div class="video-wrapper">
+                <iframe id="videoFrame" class="video-frame" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-info">
+                <p class="video-description" id="currentVideoDesc"></p>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Lista de vídeos para cada curso
         const courseVideos = {
@@ -408,28 +504,28 @@
                 title: '🎮 Programação Roblox (Lua)',
                 videos: [
                     {
-                        title: 'Aula 01 - Introdução ao Roblox Studio',
+                        title: 'Aula 1 - Introdução ao Roblox Studio',
                         description: 'Aprenda os básicos do Roblox Studio',
-                        url: 'https://www.youtube.com/watch?v=NHMqYCoz0-k'
+                        videoId: 'NHMqYCoz0-k'  // Substitua pelo ID do seu vídeo
                     },
                 ]
             },
             modelagem3d: {
                 title: '🎨 Modelagem 3D',
                 videos: [
-                    
+
                 ]
             },
             edicaovideo: {
                 title: '🎬 Edição de Vídeo',
                 videos: [
-                    
+
                 ]
             },
             eletronica: {
                 title: '⚡ Circuitos e Eletrónica',
                 videos: [
-                    
+                
                 ]
             },
             python: {
@@ -441,23 +537,44 @@
             jogos2d: {
                 title: '🕹️ Criação de Jogos 2D',
                 videos: [
-                   
                 ]
             }
         };
 
         // URLs do Discord para cada curso
         const discordLinks = {
-            roblox: 'https://discord.gg/V5Uq6SY7Mf',
-            modelagem3d: 'https://discord.gg/V5Uq6SY7Mf',
-            edicaovideo: 'https://discord.gg/V5Uq6SY7Mf',
-            eletronica: 'https://discord.gg/V5Uq6SY7Mf',
-            python: 'https://discord.gg/V5Uq6SY7Mf',
-            jogos2d: 'https://discord.gg/V5Uq6SY7Mf'
+            roblox: 'https://discord.gg/KaQQZwaYX5',
+            modelagem3d: 'https://discord.gg/KaQQZwaYX5',
+            edicaovideo: 'https://discord.gg/KaQQZwaYX5',
+            eletronica: 'https://discord.gg/KaQQZwaYX5',
+            python: 'https://discord.gg/KaQQZwaYX5',
+            jogos2d: 'https://discord.gg/KaQQZwaYX5'
         };
 
         function openDiscord(course) {
             window.open(discordLinks[course], '_blank');
+        }
+
+        function playVideo(videoId, title, description) {
+            const videoPlayer = document.getElementById('videoPlayer');
+            const videoFrame = document.getElementById('videoFrame');
+            const videoTitle = document.getElementById('currentVideoTitle');
+            const videoDesc = document.getElementById('currentVideoDesc');
+
+            videoFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            videoTitle.textContent = title;
+            videoDesc.textContent = description;
+            
+            videoPlayer.style.display = 'block';
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function closeVideoPlayer() {
+            const videoPlayer = document.getElementById('videoPlayer');
+            const videoFrame = document.getElementById('videoFrame');
+            
+            videoFrame.src = '';
+            videoPlayer.style.display = 'none';
         }
 
         function openVideo(course) {
@@ -472,7 +589,7 @@
             courseData.videos.forEach(video => {
                 const li = document.createElement('li');
                 li.className = 'video-item';
-                li.onclick = () => window.open(video.url, '_blank');
+                li.onclick = () => playVideo(video.videoId, video.title, video.description);
                 
                 li.innerHTML = `
                     <span>▶️</span>
