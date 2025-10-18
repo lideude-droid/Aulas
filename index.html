@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academia de Tecnologia - Aprenda a Criar</title>
+    <title>Academia Tech - Transforme o Futuro</title>
     <style>
         * {
             margin: 0;
@@ -12,51 +12,219 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Banner Hero */
+        .hero-banner {
+            position: relative;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveGrid 20s linear infinite;
+        }
+
+        @keyframes moveGrid {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
             padding: 20px;
+            max-width: 1000px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 10px 25px;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero-title {
+            font-size: 4.5em;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            animation: fadeInUp 1s ease 0.2s both;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5em;
+            opacity: 0.95;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease 0.4s both;
+            font-weight: 300;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            gap: 20px;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .cta-button {
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-primary {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .cta-secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            backdrop-filter: blur(10px);
+            border: 2px solid white;
+        }
+
+        .cta-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator::before {
+            content: '⌄';
+            font-size: 2em;
+            opacity: 0.7;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Seção de Cursos */
+        .courses-section {
+            padding: 100px 20px;
+            background: #0a0a0a;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 80px;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 8px 20px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            font-size: 0.85em;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-size: 3em;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .section-description {
+            font-size: 1.2em;
+            opacity: 0.7;
+            line-height: 1.6;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-        }
-
-        header {
-            text-align: center;
-            color: white;
-            padding: 40px 20px;
-            animation: fadeIn 1s ease-in;
-        }
-
-        h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .subtitle {
-            font-size: 1.3em;
-            opacity: 0.95;
         }
 
         .courses-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 40px;
             padding: 20px;
         }
 
         .course-card {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-            cursor: pointer;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 24px;
+            padding: 40px;
             position: relative;
             overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            flex-direction: column;
         }
 
         .course-card::before {
@@ -64,99 +232,147 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
             transform: scaleX(0);
-            transition: transform 0.3s ease;
+            transition: transform 0.4s ease;
         }
 
         .course-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            transform: translateY(-12px);
+            box-shadow: 0 30px 60px rgba(102, 126, 234, 0.3);
+            border-color: rgba(102, 126, 234, 0.5);
         }
 
         .course-card:hover::before {
             transform: scaleX(1);
         }
 
-        .course-icon {
-            font-size: 3em;
-            margin-bottom: 15px;
-            display: block;
+        .course-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-size: 2.5em;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
         }
 
         .course-title {
-            font-size: 1.5em;
-            color: #333;
-            margin-bottom: 10px;
-            font-weight: bold;
+            font-size: 1.8em;
+            color: #fff;
+            margin-bottom: 15px;
+            font-weight: 800;
         }
 
         .course-description {
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 20px;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.7;
+            margin-bottom: 25px;
+            font-size: 1.05em;
         }
 
         .course-features {
             list-style: none;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            flex-grow: 1;
         }
 
         .course-features li {
-            padding: 5px 0;
-            color: #555;
+            padding: 12px 0;
+            color: rgba(255,255,255,0.8);
             display: flex;
             align-items: center;
+            font-size: 1em;
         }
 
         .course-features li::before {
             content: '✓';
             color: #667eea;
             font-weight: bold;
-            margin-right: 10px;
+            margin-right: 12px;
+            font-size: 1.2em;
+            width: 24px;
+            height: 24px;
+            background: rgba(102, 126, 234, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .button-group {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             flex-direction: column;
         }
 
-        .enroll-btn, .discord-btn, .video-btn {
+        .course-btn {
             color: white;
             border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
+            padding: 16px 30px;
+            border-radius: 12px;
             font-size: 1em;
             cursor: pointer;
             width: 100%;
             transition: all 0.3s ease;
-            font-weight: bold;
+            font-weight: 700;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .enroll-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .course-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .course-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .course-btn span {
+            position: relative;
+            z-index: 1;
         }
 
         .discord-btn {
             background: linear-gradient(135deg, #5865F2 0%, #4752C4 100%);
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
+        }
+
+        .discord-btn:hover {
+            box-shadow: 0 6px 25px rgba(88, 101, 242, 0.6);
+            transform: translateY(-2px);
         }
 
         .video-btn {
             background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%);
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
         }
 
-        .enroll-btn:hover, .discord-btn:hover, .video-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        .video-btn:hover {
+            box-shadow: 0 6px 25px rgba(255, 0, 0, 0.6);
+            transform: translateY(-2px);
         }
 
+        /* Modal de Lista de Vídeos */
         .modal {
             display: none;
             position: fixed;
@@ -164,26 +380,109 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.9);
             z-index: 1000;
             justify-content: center;
             align-items: center;
             animation: fadeIn 0.3s ease;
             overflow-y: auto;
             padding: 20px;
+            backdrop-filter: blur(10px);
         }
 
         .modal-content {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            max-width: 600px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 50px;
+            border-radius: 24px;
+            max-width: 700px;
             width: 90%;
-            animation: slideUp 0.3s ease;
-            max-height: 80vh;
+            animation: slideUp 0.4s ease;
+            max-height: 85vh;
             overflow-y: auto;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
         }
 
+        .modal-content h2 {
+            color: #fff;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 2em;
+            font-weight: 800;
+        }
+
+        .video-list {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .video-item {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .video-item:hover {
+            transform: translateX(10px);
+            background: rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .video-item-icon {
+            font-size: 2em;
+            min-width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-item-text {
+            flex: 1;
+        }
+
+        .video-item-title {
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+            font-size: 1.1em;
+        }
+
+        .video-item-desc {
+            font-size: 0.95em;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .close-modal {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 30px;
+            font-size: 1.1em;
+            width: 100%;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+        }
+
+        /* Player de Vídeo */
         .video-player-modal {
             display: none;
             position: fixed;
@@ -205,33 +504,36 @@
 
         .video-player-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 20px;
+            padding: 25px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
 
         .video-player-title {
             color: white;
-            font-size: 1.5em;
-            font-weight: bold;
+            font-size: 1.6em;
+            font-weight: 800;
         }
 
         .back-btn {
             background: rgba(255,255,255,0.2);
             color: white;
             border: 2px solid white;
-            padding: 10px 20px;
-            border-radius: 20px;
+            padding: 12px 28px;
+            border-radius: 50px;
             cursor: pointer;
             font-size: 1em;
             transition: all 0.3s ease;
-            font-weight: bold;
+            font-weight: 700;
+            backdrop-filter: blur(10px);
         }
 
         .back-btn:hover {
             background: white;
             color: #667eea;
+            transform: translateX(-5px);
         }
 
         .video-wrapper {
@@ -239,88 +541,32 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 40px;
             background: #000;
         }
 
         .video-frame {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1400px;
             aspect-ratio: 16/9;
             border: none;
-            border-radius: 10px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
         }
 
         .video-info {
-            background: #1a1a1a;
+            background: #0a0a0a;
             color: white;
-            padding: 20px;
-            max-width: 1200px;
+            padding: 30px 40px;
+            max-width: 1400px;
             margin: 0 auto;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
 
         .video-description {
-            font-size: 1.1em;
-            line-height: 1.6;
-            opacity: 0.9;
-        }
-
-        .modal-content h2 {
-            color: #333;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .video-list {
-            list-style: none;
-            margin: 20px 0;
-        }
-
-        .video-item {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .video-item:hover {
-            transform: translateX(10px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .video-item span {
-            font-size: 1.5em;
-        }
-
-        .video-item-text {
-            flex: 1;
-        }
-
-        .video-item-title {
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        .video-item-desc {
-            font-size: 0.9em;
-            color: #666;
-        }
-
-        .close-modal {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 10px 30px;
-            border-radius: 20px;
-            cursor: pointer;
-            margin-top: 20px;
-            font-size: 1em;
+            font-size: 1.15em;
+            line-height: 1.8;
+            opacity: 0.8;
         }
 
         @keyframes fadeIn {
@@ -331,7 +577,7 @@
         @keyframes slideUp {
             from { 
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(50px);
             }
             to { 
                 opacity: 1;
@@ -340,140 +586,195 @@
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2em;
+            .hero-title {
+                font-size: 2.5em;
             }
             
-            .subtitle {
-                font-size: 1em;
+            .hero-subtitle {
+                font-size: 1.1em;
             }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2em;
+            }
+
+            .video-player-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+
+        /* Scrollbar customizada */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🚀 Academia de Tecnologia</h1>
-            <p class="subtitle">Transforme suas ideias em realidade com nossas aulas</p>
-        </header>
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+        <div class="hero-content">
+            <div class="hero-badge">🚀 Próxima Geração de Criadores</div>
+            <h1 class="hero-title">Transforme o Futuro com Tecnologia</h1>
+            <p class="hero-subtitle">Aprenda programação, design e criação de jogos com os melhores cursos online</p>
+            <div class="hero-cta">
+                <a href="#cursos" class="cta-button cta-primary">Explorar Cursos</a>
+                <a href="#cursos" class="cta-button cta-secondary">Assistir Demo</a>
+            </div>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
 
-        <div class="courses-grid">
-            <div class="course-card">
-                <span class="course-icon">🎮</span>
-                <h2 class="course-title">Programação Roblox (Lua)</h2>
-                <p class="course-description">Crie jogos incríveis no Roblox e aprenda programação em Lua de forma divertida.</p>
-                <ul class="course-features">
-                    <li>Criar jogos do zero</li>
-                    <li>Scripts e eventos</li>
-                    <li>Monetização no Roblox</li>
-                </ul>
-                <div class="button-group">
-                    <button class="discord-btn" onclick="openDiscord('roblox')">
-                        <span>💬</span> Entrar no Discord
-                    </button>
-                    <button class="video-btn" onclick="openVideo('roblox')">
-                        <span>▶️</span> Vídeos Gratuitos
-                    </button>
-                </div>
+    <!-- Seção de Cursos -->
+    <section class="courses-section" id="cursos">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">📚 Nossos Cursos</div>
+                <h2 class="section-title">Escolha o Seu Caminho</h2>
+                <p class="section-description">Cursos práticos e profissionais que vão do básico ao avançado. Aprenda no seu ritmo com conteúdo exclusivo e suporte completo.</p>
             </div>
 
-            <div class="course-card">
-                <span class="course-icon">🎨</span>
-                <h2 class="course-title">Modelagem 3D</h2>
-                <p class="course-description">Domine as ferramentas de modelagem 3D e crie personagens, cenários e objetos profissionais.</p>
-                <ul class="course-features">
-                    <li>Blender e outras ferramentas</li>
-                    <li>Texturas e materiais</li>
-                    <li>Animação básica</li>
-                </ul>
-                <div class="button-group">
-                    <button class="discord-btn" onclick="openDiscord('modelagem3d')">
-                        <span>💬</span> Entrar no Discord
-                    </button>
-                    <button class="video-btn" onclick="openVideo('modelagem3d')">
-                        <span>▶️</span> Vídeos Gratuitos
-                    </button>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-icon-wrapper">🎮</div>
+                    <h2 class="course-title">Programação Roblox (Lua)</h2>
+                    <p class="course-description">Crie jogos incríveis no Roblox e aprenda programação em Lua de forma divertida e prática.</p>
+                    <ul class="course-features">
+                        <li>Criar jogos do zero</li>
+                        <li>Scripts e eventos avançados</li>
+                        <li>Monetização no Roblox</li>
+                    </ul>
+                    <div class="button-group">
+                        <button class="course-btn discord-btn" onclick="openDiscord('roblox')">
+                            <span>💬 Entrar no Discord</span>
+                        </button>
+                        <button class="course-btn video-btn" onclick="openVideo('roblox')">
+                            <span>▶️ Vídeos Gratuitos</span>
+                        </button>
+                    </div>
                 </div>
-            </div>
 
-            <div class="course-card">
-                <span class="course-icon">🎬</span>
-                <h2 class="course-title">Edição de Vídeo</h2>
-                <p class="course-description">Aprenda a editar vídeos como um profissional e crie conteúdo impressionante.</p>
-                <ul class="course-features">
-                    <li>Software de edição profissional</li>
-                    <li>Efeitos visuais e transições</li>
-                    <li>Correção de cor e áudio</li>
-                </ul>
-                <div class="button-group">
-                    <button class="discord-btn" onclick="openDiscord('edicaovideo')">
-                        <span>💬</span> Entrar no Discord
-                    </button>
-                    <button class="video-btn" onclick="openVideo('edicaovideo')">
-                        <span>▶️</span> Vídeos Gratuitos
-                    </button>
+                <div class="course-card">
+                    <div class="course-icon-wrapper">🎨</div>
+                    <h2 class="course-title">Modelagem 3D</h2>
+                    <p class="course-description">Domine as ferramentas de modelagem 3D e crie personagens, cenários e objetos profissionais.</p>
+                    <ul class="course-features">
+                        <li>Blender e outras ferramentas</li>
+                        <li>Texturas e materiais realistas</li>
+                        <li>Animação básica e avançada</li>
+                    </ul>
+                    <div class="button-group">
+                        <button class="course-btn discord-btn" onclick="openDiscord('modelagem3d')">
+                            <span>💬 Entrar no Discord</span>
+                        </button>
+                        <button class="course-btn video-btn" onclick="openVideo('modelagem3d')">
+                            <span>▶️ Vídeos Gratuitos</span>
+                        </button>
+                    </div>
                 </div>
-            </div>
 
-            <div class="course-card">
-                <span class="course-icon">⚡</span>
-                <h2 class="course-title">Circuitos e Eletrónica</h2>
-                <p class="course-description">Construa projetos eletrónicos com Arduino, sensores e componentes reais.</p>
-                <ul class="course-features">
-                    <li>Arduino e microcontroladores</li>
-                    <li>Sensores e atuadores</li>
-                    <li>Projetos práticos</li>
-                </ul>
-                <div class="button-group">
-                    <button class="discord-btn" onclick="openDiscord('eletronica')">
-                        <span>💬</span> Entrar no Discord
-                    </button>
-                    <button class="video-btn" onclick="openVideo('eletronica')">
-                        <span>▶️</span> Vídeos Gratuitos
-                    </button>
+                <div class="course-card">
+                    <div class="course-icon-wrapper">🎬</div>
+                    <h2 class="course-title">Edição de Vídeo</h2>
+                    <p class="course-description">Aprenda a editar vídeos como um profissional e crie conteúdo impressionante para qualquer plataforma.</p>
+                    <ul class="course-features">
+                        <li>Software de edição profissional</li>
+                        <li>Efeitos visuais e transições</li>
+                        <li>Correção de cor e áudio</li>
+                    </ul>
+                    <div class="button-group">
+                        <button class="course-btn discord-btn" onclick="openDiscord('edicaovideo')">
+                            <span>💬 Entrar no Discord</span>
+                        </button>
+                        <button class="course-btn video-btn" onclick="openVideo('edicaovideo')">
+                            <span>▶️ Vídeos Gratuitos</span>
+                        </button>
+                    </div>
                 </div>
-            </div>
 
-            <div class="course-card">
-                <span class="course-icon">🐍</span>
-                <h2 class="course-title">Python</h2>
-                <p class="course-description">Aprenda a linguagem mais popular do mundo e crie aplicações incríveis.</p>
-                <ul class="course-features">
-                    <li>Fundamentos de programação</li>
-                    <li>Automação e web scraping</li>
-                    <li>Projetos práticos</li>
-                </ul>
-                <div class="button-group">
-                    <button class="discord-btn" onclick="openDiscord('python')">
-                        <span>💬</span> Entrar no Discord
-                    </button>
-                    <button class="video-btn" onclick="openVideo('python')">
-                        <span>▶️</span> Vídeos Gratuitos
-                    </button>
+                <div class="course-card">
+                    <div class="course-icon-wrapper">⚡</div>
+                    <h2 class="course-title">Circuitos e Eletrónica</h2>
+                    <p class="course-description">Construa projetos eletrónicos incríveis com Arduino, sensores e componentes reais.</p>
+                    <ul class="course-features">
+                        <li>Arduino e microcontroladores</li>
+                        <li>Sensores e atuadores</li>
+                        <li>Projetos práticos e IoT</li>
+                    </ul>
+                    <div class="button-group">
+                        <button class="course-btn discord-btn" onclick="openDiscord('eletronica')">
+                            <span>💬 Entrar no Discord</span>
+                        </button>
+                        <button class="course-btn video-btn" onclick="openVideo('eletronica')">
+                            <span>▶️ Vídeos Gratuitos</span>
+                        </button>
+                    </div>
                 </div>
-            </div>
 
-            <div class="course-card">
-                <span class="course-icon">🕹️</span>
-                <h2 class="course-title">Criação de Jogos 2D</h2>
-                <p class="course-description">Desenvolva jogos 2D completos usando engines modernas como Unity ou Godot.</p>
-                <ul class="course-features">
-                    <li>Game design e mecânicas</li>
-                    <li>Sprites e animações</li>
-                    <li>Publicação de jogos</li>
-                </ul>
-                <div class="button-group">
-                    <button class="discord-btn" onclick="openDiscord('jogos2d')">
-                        <span>💬</span> Entrar no Discord
-                    </button>
-                    <button class="video-btn" onclick="openVideo('jogos2d')">
-                        <span>▶️</span> Vídeos Gratuitos
-                    </button>
+                <div class="course-card">
+                    <div class="course-icon-wrapper">🐍</div>
+                    <h2 class="course-title">Python</h2>
+                    <p class="course-description">Aprenda a linguagem mais popular do mundo e crie aplicações incríveis do zero.</p>
+                    <ul class="course-features">
+                        <li>Fundamentos de programação</li>
+                        <li>Automação e web scraping</li>
+                        <li>Projetos práticos e profissionais</li>
+                    </ul>
+                    <div class="button-group">
+                        <button class="course-btn discord-btn" onclick="openDiscord('python')">
+                            <span>💬 Entrar no Discord</span>
+                        </button>
+                        <button class="course-btn video-btn" onclick="openVideo('python')">
+                            <span>▶️ Vídeos Gratuitos</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-icon-wrapper">🕹️</div>
+                    <h2 class="course-title">Criação de Jogos 2D</h2>
+                    <p class="course-description">Desenvolva jogos 2D completos usando engines modernas como Unity ou Godot.</p>
+                    <ul class="course-features">
+                        <li>Game design e mecânicas</li>
+                        <li>Sprites e animações</li>
+                        <li>Publicação de jogos</li>
+                    </ul>
+                    <div class="button-group">
+                        <button class="course-btn discord-btn" onclick="openDiscord('jogos2d')">
+                            <span>💬 Entrar no Discord</span>
+                        </button>
+                        <button class="course-btn video-btn" onclick="openVideo('jogos2d')">
+                            <span>▶️ Vídeos Gratuitos</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
+    <!-- Modal de Lista de Vídeos -->
     <div class="modal" id="modal">
         <div class="modal-content">
             <h2 id="modal-title"></h2>
@@ -482,6 +783,7 @@
         </div>
     </div>
 
+    <!-- Player de Vídeo -->
     <div class="video-player-modal" id="videoPlayer">
         <div class="video-player-container">
             <div class="video-player-header">
@@ -505,8 +807,8 @@
                 videos: [
                     {
                         title: 'Aula 1 - Introdução ao Roblox Studio',
-                        description: 'Aprenda os básicos do Roblox Studio',
-                        videoId: 'NHMqYCoz0-k'  // Substitua pelo ID do seu vídeo
+                        description: 'Aprenda os básicos do Roblox Studio e crie seu primeiro jogo',
+                        videoId: 'NHMqYCoz0-k'
                     },
                 ]
             },
@@ -525,18 +827,19 @@
             eletronica: {
                 title: '⚡ Circuitos e Eletrónica',
                 videos: [
-                
+
                 ]
             },
             python: {
                 title: '🐍 Python',
                 videos: [
-                    
+
                 ]
             },
             jogos2d: {
                 title: '🕹️ Criação de Jogos 2D',
                 videos: [
+
                 ]
             }
         };
@@ -567,6 +870,7 @@
             
             videoPlayer.style.display = 'block';
             document.getElementById('modal').style.display = 'none';
+            document.body.style.overflow = 'hidden';
         }
 
         function closeVideoPlayer() {
@@ -575,6 +879,7 @@
             
             videoFrame.src = '';
             videoPlayer.style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
 
         function openVideo(course) {
@@ -592,7 +897,7 @@
                 li.onclick = () => playVideo(video.videoId, video.title, video.description);
                 
                 li.innerHTML = `
-                    <span>▶️</span>
+                    <div class="video-item-icon">▶️</div>
                     <div class="video-item-text">
                         <div class="video-item-title">${video.title}</div>
                         <div class="video-item-desc">${video.description}</div>
@@ -603,11 +908,13 @@
             });
 
             modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
             const modal = document.getElementById('modal');
             modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
 
         window.onclick = function(e) {
@@ -616,6 +923,20 @@
                 closeModal();
             }
         }
+
+        // Smooth scroll para âncoras
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>
